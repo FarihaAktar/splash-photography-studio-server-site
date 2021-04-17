@@ -104,7 +104,7 @@ client.connect(err => {
         adminCollection.find({ email: req.query.email })
           .toArray((err, admins) => {
             console.log(admins)
-            res.send(admins)
+            // res.send(admins)
             if(admins.length === 0){
                 res.send([])
             }
