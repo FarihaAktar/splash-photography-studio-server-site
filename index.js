@@ -122,6 +122,13 @@ client.connect(err => {
             })
     });
 
+    app.delete('/delete/:id', (req, res) => {
+        const id = ObjectId(req.params.id);
+        console.log("delete this", id)
+        serviceCollection.findOneAndDelete({ _id: id })
+          .then(documents => res.send(!!documents.value))
+      })
+
 
 });
 
