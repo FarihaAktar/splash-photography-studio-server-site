@@ -82,6 +82,13 @@ client.connect(err => {
     
       })
 
+      app.get('/reviews', (req, res) => {
+        reviewCollection.find()
+            .toArray((err, services) => {
+                res.send(services)
+            })
+    });
+
 
 });
 
