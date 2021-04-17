@@ -31,7 +31,7 @@ client.connect(err => {
     const reviewCollection = client.db("splashUser").collection("reviews");
     const adminCollection = client.db("splashUser").collection("admin");
 
-   
+
     app.post('/addService', (req, res) => {
         const newService = req.body;
         console.log('new product added', newService);
@@ -60,30 +60,30 @@ client.connect(err => {
         const order = req.body;
         // console.log('new product added', order);
         bookingsCollection.insertOne(order)
-          .then(result => {
-            res.send(result.insertedCount > 0)
-          })
-    
-      })
+            .then(result => {
+                res.send(result.insertedCount > 0)
+            })
 
-      app.get('/bookings', (req, res) => {
+    })
+
+    app.get('/bookings', (req, res) => {
         bookingsCollection.find({ email: req.query.email })
-          .toArray((err, documents) => {
-            console.log(documents)
-            res.send(documents)
-          })
-      })
+            .toArray((err, documents) => {
+                console.log(documents)
+                res.send(documents)
+            })
+    })
 
-      app.post('/review', (req, res) => {
+    app.post('/review', (req, res) => {
         const review = req.body;
         reviewCollection.insertOne(review)
-          .then(result => {
-            res.send(result.insertedCount > 0)
-          })
-    
-      })
+            .then(result => {
+                res.send(result.insertedCount > 0)
+            })
 
-      app.get('/reviews', (req, res) => {
+    })
+
+    app.get('/reviews', (req, res) => {
         reviewCollection.find()
             .toArray((err, services) => {
                 res.send(services)
@@ -93,29 +93,31 @@ client.connect(err => {
     app.post('/addAdmin', (req, res) => {
         const admin = req.body;
         adminCollection.insertOne(admin)
-          .then(result => {
-            res.send(result.insertedCount > 0)
-          })
-    
-      })
-
-      app.get('/orderlist', (req, res) => {
-          console.log(req.query.email)
-        adminCollection.find({ email: req.query.email })
-          .toArray((err, admins) => {
-            console.log(admins)
-            // res.send(admins)
-            if(admins.length === 0){
-                res.send([])
-            }
-            bookingsCollection.find()
-            .toArray((err, documents)=>{
-                res.send(documents)
+            .then(result => {
+                res.send(result.insertedCount > 0)
             })
-          })
-      })
 
-      app.get('/manageService', (req, res) => {
+    })
+
+    app.get('/orderlist', (req, res) => {
+        console.log(req.query.email)
+        adminCollection.find({ email: req.query.email })
+            .toArray((err, admins) => {
+                console.log(admins)
+                // res.send(admins)
+                if (admins.length === 0) {
+                    res.send([])
+                }
+                else{
+                    bookingsCollection.find()
+                        .toArray((err, documents) => {
+                            res.send(documents)
+                        })
+                }
+            })
+    })
+
+    app.get('/manageService', (req, res) => {
         serviceCollection.find()
             .toArray((err, services) => {
                 res.send(services)
@@ -126,8 +128,8 @@ client.connect(err => {
         const id = ObjectId(req.params.id);
         console.log("delete this", id)
         serviceCollection.findOneAndDelete({ _id: id })
-          .then(documents => res.send(!!documents.value))
-      })
+            .then(documents => res.send(!!documents.value))
+    })
 
 
 });
