@@ -29,6 +29,7 @@ client.connect(err => {
     const serviceCollection = client.db("splashUser").collection("services");
     const bookingsCollection = client.db("splashUser").collection("bookings");
     const reviewCollection = client.db("splashUser").collection("reviews");
+    const adminCollection = client.db("splashUser").collection("admin");
 
    
     app.post('/addService', (req, res) => {
@@ -88,6 +89,15 @@ client.connect(err => {
                 res.send(services)
             })
     });
+
+    app.post('/addAdmin', (req, res) => {
+        const admin = req.body;
+        adminCollection.insertOne(admin)
+          .then(result => {
+            res.send(result.insertedCount > 0)
+          })
+    
+      })
 
 
 });
