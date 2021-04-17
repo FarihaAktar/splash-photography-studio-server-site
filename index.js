@@ -105,13 +105,13 @@ client.connect(err => {
           .toArray((err, admins) => {
             console.log(admins)
             res.send(admins)
-            // if(admins.length === 0){
-            //     res.send([])
-            // }
-            // bookingsCollection.find()
-            // .toArray((err, documents)=>{
-            //     res.send(documents)
-            // })
+            if(admins.length === 0){
+                res.send([])
+            }
+            bookingsCollection.find()
+            .toArray((err, documents)=>{
+                res.send(documents)
+            })
           })
       })
 
