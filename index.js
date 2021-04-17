@@ -99,6 +99,20 @@ client.connect(err => {
     
       })
 
+      app.get('/orderlist', (req, res) => {
+        adminCollection.find({ email: req.query.email })
+          .toArray((err, admins) => {
+            console.log(admins)
+            if(admins.length === 0){
+                res.send(null)
+            }
+            bookingsCollection.find()
+            .toArray((err, documents)=>{
+                res.send(documents)
+            })
+          })
+      })
+
 
 });
 
