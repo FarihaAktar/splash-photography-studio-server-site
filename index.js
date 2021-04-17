@@ -28,6 +28,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
     const serviceCollection = client.db("splashUser").collection("services");
     const bookingsCollection = client.db("splashUser").collection("bookings");
+    const reviewCollection = client.db("splashUser").collection("reviews");
 
    
     app.post('/addService', (req, res) => {
@@ -70,6 +71,15 @@ client.connect(err => {
             console.log(documents)
             res.send(documents)
           })
+      })
+
+      app.post('/review', (req, res) => {
+        const review = req.body;
+        reviewCollection.insertOne(review)
+          .then(result => {
+            res.send(result.insertedCount > 0)
+          })
+    
       })
 
 
