@@ -101,17 +101,18 @@ client.connect(err => {
 
       app.get('/orderlist', (req, res) => {
           console.log(req.query.email)
-        // adminCollection.find({ email: req.query.email })
-        //   .toArray((err, admins) => {
-        //     console.log(admins)
-        //     if(admins.length === 0){
-        //         res.send([])
-        //     }
-        //     bookingsCollection.find()
-        //     .toArray((err, documents)=>{
-        //         res.send(documents)
-        //     })
-        //   })
+        adminCollection.find({ email: req.query.email })
+          .toArray((err, admins) => {
+            console.log(admins)
+            res.send(admins)
+            // if(admins.length === 0){
+            //     res.send([])
+            // }
+            // bookingsCollection.find()
+            // .toArray((err, documents)=>{
+            //     res.send(documents)
+            // })
+          })
       })
 
 
