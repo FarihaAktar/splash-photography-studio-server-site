@@ -104,7 +104,7 @@ client.connect(err => {
           .toArray((err, admins) => {
             console.log(admins)
             if(admins.length === 0){
-                res.send(null)
+                res.send([])
             }
             bookingsCollection.find()
             .toArray((err, documents)=>{
