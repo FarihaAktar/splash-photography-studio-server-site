@@ -115,6 +115,13 @@ client.connect(err => {
           })
       })
 
+      app.get('/manageService', (req, res) => {
+        serviceCollection.find()
+            .toArray((err, services) => {
+                res.send(services)
+            })
+    });
+
 
 });
 
