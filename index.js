@@ -124,6 +124,11 @@ client.connect(err => {
             })
     });
 
+    app.patch('/update/:id', (re, res)=>{
+        const id = ObjectId(req.params.id);
+        console.log(id)
+    })
+
     app.delete('/delete/:id', (req, res) => {
         const id = ObjectId(req.params.id);
         console.log("delete this", id)
