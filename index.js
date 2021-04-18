@@ -126,7 +126,14 @@ client.connect(err => {
 
     app.patch('/update/:id', (re, res)=>{
         const id = ObjectId(req.params.id);
-        console.log(id)
+        bookingsCollection.updateOne({_id: id},
+        {
+            $set: {status: req.body.status}
+        })
+        .then(result =>{
+            console.log(result)
+        })
+
     })
 
     app.delete('/delete/:id', (req, res) => {
