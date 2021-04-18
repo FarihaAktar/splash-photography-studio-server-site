@@ -124,9 +124,9 @@ client.connect(err => {
             })
     });
 
-    app.patch('/update/:id', (re, res)=>{
+    app.patch('/update/:id', (req, res)=>{
         const id = ObjectId(req.params.id);
-        console.log(re.params.id)
+        console.log(req.params.id)
         bookingsCollection.updateOne({_id: id},
         {
             $set: {status: req.body.status}
